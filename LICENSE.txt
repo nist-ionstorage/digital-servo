@@ -1,0 +1,22 @@
+This hardware and software was developed at the National Institute of
+Standards and Technology (NIST) by employees of the Federal Government
+in the course of their official duties. Pursuant to Title 17 Section 105
+of the United States Code, this hardware and software is not subject to
+copyright protection and is in the public domain.  NIST assumes no
+responsibility whatsoever for its use by other parties, and makes no
+guarantees, expressed or implied, about its quality, reliability, or any
+other characteristic.
+
+Commercial equipment and software are identified here for informational
+purposes only.  Such identification does not imply recommendation of
+or endorsement by NIST, nor does it imply that the products so identified
+are necessarily the best available for the purpose.
+
+This software is based in part on the work of the Qt (http://www.qt.io)
+and Qwt (http://qwt.sf.net) projects, both of which are licensed under
+the GNU Lesser General Public License (LGPL).  It also uses the Opal
+Kelly FrontPanel SDK, which is not distributed here because of copyright
+restrictions and may be obtained directly from Opal Kelly
+(https://www.opalkelly.com).
+
+We would appreciate acknowledgement if this hardware or software is used.

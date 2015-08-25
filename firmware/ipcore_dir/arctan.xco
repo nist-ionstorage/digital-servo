@@ -1,0 +1,69 @@
+##############################################################
+#
+# Xilinx Core Generator version 13.2
+# Date: Tue Jun 05 18:43:54 2012
+#
+##############################################################
+#
+#  This file contains the customisation parameters for a
+#  Xilinx CORE Generator IP GUI. It is strongly recommended
+#  that you do not manually alter this file as it may cause
+#  unexpected and unsupported behavior.
+#
+##############################################################
+#
+#  Generated from component: xilinx.com:ip:cordic:4.0
+#
+##############################################################
+#
+# BEGIN Project Options
+SET addpads = false
+SET asysymbol = true
+SET busformat = BusFormatAngleBracketNotRipped
+SET createndf = false
+SET designentry = Verilog
+SET device = xc6slx150
+SET devicefamily = spartan6
+SET flowvendor = Foundation_ISE
+SET formalverification = false
+SET foundationsym = false
+SET implementationfiletype = Ngc
+SET package = fgg484
+SET removerpms = false
+SET simulationfiles = Behavioral
+SET speedgrade = -2
+SET verilogsim = true
+SET vhdlsim = true
+# END Project Options
+# BEGIN Select
+SELECT CORDIC xilinx.com:ip:cordic:4.0
+# END Select
+# BEGIN Parameters
+CSET architectural_configuration=Parallel
+CSET ce=false
+CSET coarse_rotation=true
+CSET compensation_scaling=No_Scale_Compensation
+CSET component_name=arctan
+CSET data_format=SignedFraction
+CSET functional_selection=Arc_Tan
+CSET input_width=33
+CSET iterations=0
+CSET nd=false
+CSET output_width=16
+CSET phase_format=Scaled_Radians
+CSET phase_output=true
+CSET pipelining_mode=Optimal
+CSET precision=0
+CSET rdy=false
+CSET register_inputs=false
+CSET register_outputs=true
+CSET round_mode=Nearest_Even
+CSET sclr=false
+CSET x_out=false
+CSET y_out=false
+# END Parameters
+# BEGIN Extra information
+MISC pkg_timestamp=2011-06-21T06:27:35.000Z
+# END Extra information
+GENERATE
+# CRC: 7f6daa3d

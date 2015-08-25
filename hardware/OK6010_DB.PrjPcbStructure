@@ -1,0 +1,5 @@
+Record=SheetSymbol|SourceDocument=OK6010_DB.SchDoc|Designator=ADC|SchDesignator=ADC|FileName=OK6010_DB_ADC.SchDoc|SymbolType=Normal|RawFileName=OK6010_DB_ADC.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
+Record=SheetSymbol|SourceDocument=OK6010_DB.SchDoc|Designator=DAC|SchDesignator=DAC|FileName=OK6010_DB_DAC_f.SchDoc|SymbolType=Normal|RawFileName=OK6010_DB_DAC_f.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
+Record=SheetSymbol|SourceDocument=OK6010_DB.SchDoc|Designator=DAC|SchDesignator=DAC|FileName=OK6010_DB_DAC_s.SchDoc|SymbolType=Normal|RawFileName=OK6010_DB_DAC_s.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
+Record=SheetSymbol|SourceDocument=OK6010_DB.SchDoc|Designator=POWER|SchDesignator=POWER|FileName=OK6010_DB_PWR.SchDoc|SymbolType=Normal|RawFileName=OK6010_DB_PWR.SchDoc|DesignItemId= |SourceLibraryName= |ObjectKind=Sheet Symbol|RevisionGUID= |ItemGUID= |VaultGUID= 
+Record=TopLevelDocument|FileName=OK6010_DB.SchDoc

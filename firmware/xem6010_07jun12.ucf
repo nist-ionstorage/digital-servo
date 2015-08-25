@@ -1,0 +1,444 @@
+############################################################################
+# XEM6010 - Xilinx constraints file
+#
+# Pin mappings for the XEM6010.  Use this as a template and comment out 
+# the pins that are not used in your design.  (By default, map will fail
+# if this file contains constraints for signals not in your design).
+#
+# Copyright (c) 2004-2010 Opal Kelly Incorporated
+# $Rev: 584 $ $Date: 2010-10-01 11:14:42 -0500 (Fri, 01 Oct 2010) $
+############################################################################
+CONFIG VCCAUX = "3.3"; //Required for Spartan-6
+
+############################################################################
+## FrontPanel Host Interface
+############################################################################
+NET "hi_in<0>"      LOC="Y12"    | IOSTANDARD="LVCMOS33";
+NET "hi_in<1>"      LOC="AB20"   | IOSTANDARD="LVCMOS33";
+NET "hi_in<2>"      LOC="AB7"    | IOSTANDARD="LVCMOS33";
+NET "hi_in<3>"      LOC="AB8"    | IOSTANDARD="LVCMOS33";
+NET "hi_in<4>"      LOC="AA4"    | IOSTANDARD="LVCMOS33";
+NET "hi_in<5>"      LOC="AB4"    | IOSTANDARD="LVCMOS33";
+NET "hi_in<6>"      LOC="Y3"     | IOSTANDARD="LVCMOS33";
+NET "hi_in<7>"      LOC="AB3"    | IOSTANDARD="LVCMOS33";
+NET "hi_out<0>"     LOC="Y19"    | IOSTANDARD="LVCMOS33";
+NET "hi_out<1>"     LOC="AA8"    | IOSTANDARD="LVCMOS33";
+NET "hi_inout<0>"   LOC="AB12"   | IOSTANDARD="LVCMOS33";
+NET "hi_inout<1>"   LOC="AA12"   | IOSTANDARD="LVCMOS33";
+NET "hi_inout<2>"   LOC="Y13"    | IOSTANDARD="LVCMOS33";
+NET "hi_inout<3>"   LOC="AB18"   | IOSTANDARD="LVCMOS33";
+NET "hi_inout<4>"   LOC="AA18"   | IOSTANDARD="LVCMOS33";
+NET "hi_inout<5>"   LOC="V15"    | IOSTANDARD="LVCMOS33";
+NET "hi_inout<6>"   LOC="AB2"    | IOSTANDARD="LVCMOS33";
+NET "hi_inout<7>"   LOC="AA2"    | IOSTANDARD="LVCMOS33";
+NET "hi_inout<8>"   LOC="Y7"     | IOSTANDARD="LVCMOS33";
+NET "hi_inout<9>"   LOC="Y4"     | IOSTANDARD="LVCMOS33";
+NET "hi_inout<10>"  LOC="W4"     | IOSTANDARD="LVCMOS33";
+NET "hi_inout<11>"  LOC="AB6"    | IOSTANDARD="LVCMOS33";
+NET "hi_inout<12>"  LOC="AA6"    | IOSTANDARD="LVCMOS33";
+NET "hi_inout<13>"  LOC="U13"    | IOSTANDARD="LVCMOS33";
+NET "hi_inout<14>"  LOC="U14"    | IOSTANDARD="LVCMOS33";
+NET "hi_inout<15>"  LOC="AA20"   | IOSTANDARD="LVCMOS33";
+NET "hi_aa"         LOC="W11"    | IOSTANDARD="LVCMOS33";
+
+NET "hi_muxsel"     LOC = "AA22" | IOSTANDARD="LVCMOS33";
+NET "i2c_sda"       LOC = "AB9"  | IOSTANDARD="LVCMOS33" | PULLUP;
+NET "i2c_scl"       LOC = "Y9"   | IOSTANDARD="LVCMOS33" | PULLUP;
+
+NET "hi_in<0>" TNM_NET = "okHostClk";
+TIMESPEC "TS_okHostClk" = PERIOD "okHostClk" 20.83 ns HIGH 50%;  # 48 MHz
+NET "hi_inout[*]" TNM = "okHostINOUT_grp";
+TIMEGRP "okHostINOUT_grp" OFFSET = IN 9.83 ns VALID 9.83 ns BEFORE "hi_in<0>" RISING;
+TIMEGRP "okHostINOUT_grp" OFFSET = OUT 11.63 ns AFTER "hi_in<0>" RISING;
+NET "hi_out<0>" OFFSET = OUT 11.93 ns AFTER "hi_in<0>" RISING;
+#NET "hi_out<1>" OFFSET = OUT 11.93 ns AFTER "hi_in<0>" RISING; #Placeholder
+NET "hi_in<1>" OFFSET = IN 14.13 ns VALID 20.83 ns BEFORE "hi_in<0>" RISING;
+NET "hi_in<2>" OFFSET = IN 14.13 ns VALID 20.83 ns BEFORE "hi_in<0>" RISING;
+NET "hi_in<3>" OFFSET = IN 14.13 ns VALID 20.83 ns BEFORE "hi_in<0>" RISING;
+NET "hi_in<4>" OFFSET = IN 13.33 ns VALID 20.83 ns BEFORE "hi_in<0>" RISING;
+NET "hi_in<5>" OFFSET = IN 13.33 ns VALID 20.83 ns BEFORE "hi_in<0>" RISING;
+NET "hi_in<6>" OFFSET = IN 13.33 ns VALID 20.83 ns BEFORE "hi_in<0>" RISING;
+NET "hi_in<7>" OFFSET = IN 13.33 ns VALID 20.83 ns BEFORE "hi_in<0>" RISING;
+
+############################################################################
+## System Clocks                                                        
+############################################################################
+NET "clk1_in"       LOC="AB13" | IOSTANDARD="LVCMOS33";
+NET "clk1_in" 		  TNM_NET = "SYS_CLK1";
+TIMESPEC "TS_SYS_CLK1" = PERIOD "SYS_CLK1"  10  ns HIGH 50 %;
+#INST "bufg_sys_clk1" LOC="BUFGMUX_X3Y13";
+
+#NET "clk2"       LOC="Y11"  | IOSTANDARD="LVCMOS33";
+#NET "clk3"       LOC="AB11" | IOSTANDARD="LVCMOS33";
+
+############################################################################
+## Manually place two of the three PLLs (route fails if I do not do this)
+############################################################################
+
+## For LX45
+#INST "AD9783_inst/pll_base_inst/PLL_ADV"  LOC = "PLL_ADV_X0Y2";
+#INST "LTC2195_inst/pll_base_inst/PLL_ADV" LOC = "PLL_ADV_X0Y0";
+
+# For LX150
+INST "AD9783_inst/pll_base_inst/PLL_ADV"  LOC = "PLL_ADV_X0Y3";
+INST "LTC2195_inst/pll_base_inst/PLL_ADV" LOC = "PLL_ADV_X0Y0";
+
+############################################################################
+## Expansion Connectors                                                         
+############################################################################
+
+# AUX ports
+
+#NET "AUX0[0]"  			LOC=C22  | IOSTANDARD=LVCMOS33;
+#NET "AUX0[1]"  			LOC=C20  | IOSTANDARD=LVCMOS33;
+#NET "AUX0[2]"  			LOC=E22  | IOSTANDARD=LVCMOS33;
+#NET "AUX0[3]"  			LOC=E20  | IOSTANDARD=LVCMOS33;
+#NET "AUX1[0]"  			LOC=H21  | IOSTANDARD=LVCMOS33;
+#NET "AUX1[1]"  			LOC=H22  | IOSTANDARD=LVCMOS33;
+#NET "AUX1[2]"  			LOC=F21  | IOSTANDARD=LVCMOS33;
+#NET "AUX1[3]"  			LOC=F22  | IOSTANDARD=LVCMOS33;
+
+# DIO
+
+NET "DIN[0]"  			LOC=M20  | IOSTANDARD=LVCMOS33;
+NET "DIN[1]" 			LOC=D21  | IOSTANDARD=LVCMOS33;
+NET "DIN[2]"   		LOC=L20  | IOSTANDARD=LVCMOS33;
+NET "DOUT[0]"   		LOC=A20  | IOSTANDARD=LVCMOS33;
+NET "DOUT[1]" 			LOC=L22  | IOSTANDARD=LVCMOS33;
+NET "DOUT[2]"   		LOC=M22  | IOSTANDARD=LVCMOS33;
+
+# green/red status leds
+
+NET "LED_G[0]"   		LOC=J20  | IOSTANDARD=LVCMOS33;
+NET "LED_G[1]"   		LOC=B22  | IOSTANDARD=LVCMOS33;
+NET "LED_G[2]"   		LOC=D22  | IOSTANDARD=LVCMOS33;
+NET "LED_R[0]"   		LOC=J22  | IOSTANDARD=LVCMOS33;
+NET "LED_R[1]"   		LOC=A21  | IOSTANDARD=LVCMOS33;
+NET "LED_R[2]"   		LOC=B21  | IOSTANDARD=LVCMOS33;
+
+# input AD8251s
+
+NET "AD8251_IN_A0"   LOC=G16  | IOSTANDARD=LVCMOS33;
+NET "AD8251_IN_A1"   LOC=G17  | IOSTANDARD=LVCMOS33;
+NET "AD8251_IN_WR0"  LOC=H19  | IOSTANDARD=LVCMOS33;
+NET "AD8251_IN_WR1"  LOC=H18  | IOSTANDARD=LVCMOS33;
+
+# output AD8251s
+
+NET "AD8251_OUT_A0"   LOC=V21  | IOSTANDARD=LVCMOS33;
+NET "AD8251_OUT_A1"   LOC=P22  | IOSTANDARD=LVCMOS33;
+NET "AD8251_OUT_WR0"  LOC=M21  | IOSTANDARD=LVCMOS33;
+NET "AD8251_OUT_WR1"  LOC=J16  | IOSTANDARD=LVCMOS33;
+
+# LTC2195
+
+NET "LTC2195_SCS"   LOC=P21  | IOSTANDARD=LVCMOS33;
+NET "LTC2195_SCK"   LOC=T22  | IOSTANDARD=LVCMOS33;
+NET "LTC2195_SDI"   LOC=T21  | IOSTANDARD=LVCMOS33;
+NET "LTC2195_SDO"   LOC=G19  | IOSTANDARD=LVCMOS33;
+
+NET "LTC2195_ENC_P"     LOC=B18  | IOSTANDARD=LVDS_25;
+NET "LTC2195_ENC_N"     LOC=A18  | IOSTANDARD=LVDS_25;
+
+NET "LTC2195_FR_P"      LOC=U20  | IOSTANDARD=LVDS_33 | DIFF_TERM=TRUE;
+NET "LTC2195_FR_N"      LOC=U22  | IOSTANDARD=LVDS_33 | DIFF_TERM=TRUE;
+
+NET "LTC2195_DCO_P"     LOC=K20  | IOSTANDARD=LVDS_33 | DIFF_TERM=TRUE;
+NET "LTC2195_DCO_N"     LOC=K19  | IOSTANDARD=LVDS_33 | DIFF_TERM=TRUE;
+
+NET "LTC2195_D0_P[0]"   LOC=H20  | IOSTANDARD=LVDS_33 | DIFF_TERM=TRUE;
+NET "LTC2195_D0_P[1]"   LOC=D19  | IOSTANDARD=LVDS_33 | DIFF_TERM=TRUE;
+NET "LTC2195_D0_P[2]"   LOC=F18  | IOSTANDARD=LVDS_33 | DIFF_TERM=TRUE;
+NET "LTC2195_D0_P[3]"   LOC=M16  | IOSTANDARD=LVDS_33 | DIFF_TERM=TRUE;
+
+NET "LTC2195_D0_N[0]"   LOC=J19  | IOSTANDARD=LVDS_33 | DIFF_TERM=TRUE;
+NET "LTC2195_D0_N[1]"   LOC=D20  | IOSTANDARD=LVDS_33 | DIFF_TERM=TRUE;
+NET "LTC2195_D0_N[2]"   LOC=F19  | IOSTANDARD=LVDS_33 | DIFF_TERM=TRUE;
+NET "LTC2195_D0_N[3]"   LOC=L15  | IOSTANDARD=LVDS_33 | DIFF_TERM=TRUE;
+
+NET "LTC2195_D1_P[0]"   LOC=R20  | IOSTANDARD=LVDS_33 | DIFF_TERM=TRUE;
+NET "LTC2195_D1_P[1]"   LOC=N20  | IOSTANDARD=LVDS_33 | DIFF_TERM=TRUE;
+NET "LTC2195_D1_P[2]"   LOC=K21  | IOSTANDARD=LVDS_33 | DIFF_TERM=TRUE;
+NET "LTC2195_D1_P[3]"   LOC=G20  | IOSTANDARD=LVDS_33 | DIFF_TERM=TRUE;
+
+NET "LTC2195_D1_N[0]"   LOC=R22  | IOSTANDARD=LVDS_33 | DIFF_TERM=TRUE;
+NET "LTC2195_D1_N[1]"   LOC=N22  | IOSTANDARD=LVDS_33 | DIFF_TERM=TRUE;
+NET "LTC2195_D1_N[2]"   LOC=K22  | IOSTANDARD=LVDS_33 | DIFF_TERM=TRUE;
+NET "LTC2195_D1_N[3]"   LOC=G22  | IOSTANDARD=LVDS_33 | DIFF_TERM=TRUE;
+
+# AD9783
+
+NET "AD9783_RST"   LOC=K16 | IOSTANDARD=LVCMOS33;
+NET "AD9783_SCS"   LOC=K17 | IOSTANDARD=LVCMOS33;
+NET "AD9783_SCK"   LOC=J17 | IOSTANDARD=LVCMOS33;
+NET "AD9783_SDO"   LOC=F16 | IOSTANDARD=LVCMOS33;
+NET "AD9783_SDI"   LOC=F17 | IOSTANDARD=LVCMOS33;
+
+NET "AD9783_CLK_P"   LOC=C5  | IOSTANDARD=LVDS_25;
+NET "AD9783_CLK_N"   LOC=A5  | IOSTANDARD=LVDS_25;
+
+NET "AD9783_DCI_P"   LOC=B6  | IOSTANDARD=LVDS_25;
+NET "AD9783_DCI_N"   LOC=A6  | IOSTANDARD=LVDS_25;
+
+#NET "AD9783_DCO_P"   LOC=D15 | IOSTANDARD=LVDS_25;
+#NET "AD9783_DCO_N"   LOC=C16 | IOSTANDARD=LVDS_25;
+
+NET "AD9783_D_P[0]"   LOC=C17 | IOSTANDARD=LVDS_25;
+NET "AD9783_D_P[1]"   LOC=B16 | IOSTANDARD=LVDS_25;
+NET "AD9783_D_P[2]"   LOC=C15 | IOSTANDARD=LVDS_25;
+NET "AD9783_D_P[3]"   LOC=B14 | IOSTANDARD=LVDS_25;
+NET "AD9783_D_P[4]"   LOC=C13 | IOSTANDARD=LVDS_25;
+NET "AD9783_D_P[5]"   LOC=C9  | IOSTANDARD=LVDS_25;
+NET "AD9783_D_P[6]"   LOC=C7  | IOSTANDARD=LVDS_25;
+NET "AD9783_D_P[7]"   LOC=B8  | IOSTANDARD=LVDS_25;
+NET "AD9783_D_P[8]"   LOC=A3  | IOSTANDARD=LVDS_25;
+NET "AD9783_D_P[9]"   LOC=D11 | IOSTANDARD=LVDS_25;
+NET "AD9783_D_P[10]"  LOC=D10 | IOSTANDARD=LVDS_25;
+NET "AD9783_D_P[11]"  LOC=D6  | IOSTANDARD=LVDS_25;
+NET "AD9783_D_P[12]"  LOC=D9  | IOSTANDARD=LVDS_25;
+NET "AD9783_D_P[13]"  LOC=D7  | IOSTANDARD=LVDS_25;
+NET "AD9783_D_P[14]"  LOC=E16 | IOSTANDARD=LVDS_25;
+NET "AD9783_D_P[15]"  LOC=D14 | IOSTANDARD=LVDS_25;
+
+NET "AD9783_D_N[0]"   LOC=A17 | IOSTANDARD=LVDS_25;
+NET "AD9783_D_N[1]"   LOC=A16 | IOSTANDARD=LVDS_25;
+NET "AD9783_D_N[2]"   LOC=A15 | IOSTANDARD=LVDS_25;
+NET "AD9783_D_N[3]"   LOC=A14 | IOSTANDARD=LVDS_25;
+NET "AD9783_D_N[4]"   LOC=A13 | IOSTANDARD=LVDS_25;
+NET "AD9783_D_N[5]"   LOC=A9  | IOSTANDARD=LVDS_25;
+NET "AD9783_D_N[6]"   LOC=A7  | IOSTANDARD=LVDS_25;
+NET "AD9783_D_N[7]"   LOC=A8  | IOSTANDARD=LVDS_25;
+NET "AD9783_D_N[8]"   LOC=A4  | IOSTANDARD=LVDS_25;
+NET "AD9783_D_N[9]"   LOC=C12 | IOSTANDARD=LVDS_25;
+NET "AD9783_D_N[10]"  LOC=C10 | IOSTANDARD=LVDS_25;
+NET "AD9783_D_N[11]"  LOC=C6  | IOSTANDARD=LVDS_25;
+NET "AD9783_D_N[12]"  LOC=C8  | IOSTANDARD=LVDS_25;
+NET "AD9783_D_N[13]"  LOC=D8  | IOSTANDARD=LVDS_25;
+NET "AD9783_D_N[14]"  LOC=D17 | IOSTANDARD=LVDS_25;
+NET "AD9783_D_N[15]"  LOC=C14 | IOSTANDARD=LVDS_25;
+
+# AD5791
+
+NET "AD5791_SCS"   LOC=T19  | IOSTANDARD=LVCMOS33;
+NET "AD5791_SCK"   LOC=T20  | IOSTANDARD=LVCMOS33;
+NET "AD5791_SDI"   LOC=P17  | IOSTANDARD=LVCMOS33;
+NET "AD5791_SDO"   LOC=N16  | IOSTANDARD=LVCMOS33;
+
+NET "AD5791_LDAC"  LOC=P18  | IOSTANDARD=LVCMOS33;
+NET "AD5791_CLR"   LOC=M18  | IOSTANDARD=LVCMOS33;
+NET "AD5791_RST"   LOC=M17  | IOSTANDARD=LVCMOS33;
+
+############################################################################
+## Peripherals
+############################################################################
+
+# LEDs ################################################################
+NET "led[0]"     LOC="Y17"    | IOSTANDARD=LVCMOS33;
+NET "led[1]"     LOC="AB17"   | IOSTANDARD=LVCMOS33;
+NET "led[2]"     LOC="AA14"   | IOSTANDARD=LVCMOS33;
+NET "led[3]"     LOC="AB14"   | IOSTANDARD=LVCMOS33;
+NET "led[4]"     LOC="AA16"   | IOSTANDARD=LVCMOS33;
+NET "led[5]"     LOC="AB16"   | IOSTANDARD=LVCMOS33;
+NET "led[6]"     LOC="AA10"   | IOSTANDARD=LVCMOS33;
+NET "led[7]"     LOC="AB10"   | IOSTANDARD=LVCMOS33;
+
+# Flash ###############################################################
+NET "flash_scs"  LOC = "T5"   | IOSTANDARD="LVCMOS33";
+NET "flash_sck"  LOC = "W12"  | IOSTANDARD="LVCMOS33";
+NET "flash_sdo"  LOC = "Y15"  | IOSTANDARD="LVCMOS33";
+NET "flash_sdi"  LOC = "AB15" | IOSTANDARD="LVCMOS33";
+
+# DRAM ################################################################     
+#NET  "ddr2_a[0]"       LOC = "H2" | IOSTANDARD = SSTL18_II;
+#NET  "ddr2_a[10]"      LOC = "G4" | IOSTANDARD = SSTL18_II;
+#NET  "ddr2_a[11]"      LOC = "C1" | IOSTANDARD = SSTL18_II;
+#NET  "ddr2_a[12]"      LOC = "D1" | IOSTANDARD = SSTL18_II;
+#NET  "ddr2_a[1]"       LOC = "H1" | IOSTANDARD = SSTL18_II;
+#NET  "ddr2_a[2]"       LOC = "H5" | IOSTANDARD = SSTL18_II;
+#NET  "ddr2_a[3]"       LOC = "K6" | IOSTANDARD = SSTL18_II;
+#NET  "ddr2_a[4]"       LOC = "F3" | IOSTANDARD = SSTL18_II;
+#NET  "ddr2_a[5]"       LOC = "K3" | IOSTANDARD = SSTL18_II;
+#NET  "ddr2_a[6]"       LOC = "J4" | IOSTANDARD = SSTL18_II;
+#NET  "ddr2_a[7]"       LOC = "H6" | IOSTANDARD = SSTL18_II;
+#NET  "ddr2_a[8]"       LOC = "E3" | IOSTANDARD = SSTL18_II;
+#NET  "ddr2_a[9]"       LOC = "E1" | IOSTANDARD = SSTL18_II;
+#NET  "ddr2_ba[0]"      LOC = "G3" | IOSTANDARD = SSTL18_II;
+#NET  "ddr2_ba[1]"      LOC = "G1" | IOSTANDARD = SSTL18_II;
+#NET  "ddr2_ba[2]"      LOC = "F1" | IOSTANDARD = SSTL18_II;
+#NET  "ddr2_cas_n"      LOC = "K4" | IOSTANDARD = SSTL18_II;
+#NET  "ddr2_ck"         LOC = "H4" | IOSTANDARD = DIFF_SSTL18_II;
+#NET  "ddr2_ck_n"       LOC = "H3" | IOSTANDARD = DIFF_SSTL18_II;
+#NET  "ddr2_cke"        LOC = "D2" | IOSTANDARD = SSTL18_II;
+#NET  "ddr2_dm"         LOC = "L4" | IOSTANDARD = SSTL18_II;
+#NET  "ddr2_dq[0]"      LOC = "N3" | IOSTANDARD = SSTL18_II | IN_TERM = NONE;
+#NET  "ddr2_dq[10]"     LOC = "R3" | IOSTANDARD = SSTL18_II | IN_TERM = NONE;
+#NET  "ddr2_dq[11]"     LOC = "R1" | IOSTANDARD = SSTL18_II | IN_TERM = NONE;
+#NET  "ddr2_dq[12]"     LOC = "U3" | IOSTANDARD = SSTL18_II | IN_TERM = NONE;
+#NET  "ddr2_dq[13]"     LOC = "U1" | IOSTANDARD = SSTL18_II | IN_TERM = NONE;
+#NET  "ddr2_dq[14]"     LOC = "V2" | IOSTANDARD = SSTL18_II | IN_TERM = NONE;
+#NET  "ddr2_dq[15]"     LOC = "V1" | IOSTANDARD = SSTL18_II | IN_TERM = NONE;
+#NET  "ddr2_dq[1]"      LOC = "N1" | IOSTANDARD = SSTL18_II | IN_TERM = NONE;
+#NET  "ddr2_dq[2]"      LOC = "M2" | IOSTANDARD = SSTL18_II | IN_TERM = NONE;
+#NET  "ddr2_dq[3]"      LOC = "M1" | IOSTANDARD = SSTL18_II | IN_TERM = NONE;
+#NET  "ddr2_dq[4]"      LOC = "J3" | IOSTANDARD = SSTL18_II | IN_TERM = NONE;
+#NET  "ddr2_dq[5]"      LOC = "J1" | IOSTANDARD = SSTL18_II | IN_TERM = NONE;
+#NET  "ddr2_dq[6]"      LOC = "K2" | IOSTANDARD = SSTL18_II | IN_TERM = NONE;
+#NET  "ddr2_dq[7]"      LOC = "K1" | IOSTANDARD = SSTL18_II | IN_TERM = NONE;
+#NET  "ddr2_dq[8]"      LOC = "P2" | IOSTANDARD = SSTL18_II | IN_TERM = NONE;
+#NET  "ddr2_dq[9]"      LOC = "P1" | IOSTANDARD = SSTL18_II | IN_TERM = NONE;
+#NET  "ddr2_dqs"        LOC = "L3" | IOSTANDARD = DIFF_SSTL18_II | IN_TERM = NONE;
+#NET  "ddr2_dqs_n"      LOC = "L1" | IOSTANDARD = DIFF_SSTL18_II | IN_TERM = NONE;
+#NET  "ddr2_odt"        LOC = "J6" | IOSTANDARD = SSTL18_II;
+#NET  "ddr2_ras_n"      LOC = "K5" | IOSTANDARD = SSTL18_II;
+#NET  "ddr2_udm"        LOC = "M3" | IOSTANDARD = SSTL18_II;
+#NET  "ddr2_udqs"       LOC = "T2" | IOSTANDARD = DIFF_SSTL18_II | IN_TERM = NONE;
+#NET  "ddr2_udqs_n"     LOC = "T1" | IOSTANDARD = DIFF_SSTL18_II | IN_TERM = NONE;
+#NET  "ddr2_we_n"       LOC = "F2" | IOSTANDARD = SSTL18_II;
+#NET  "ddr2_cs_n"       LOC = "C3" | IOSTANDARD = LVCMOS18;
+#NET  "ddr2_rzq"        LOC = "K7" | IOSTANDARD = SSTL18_II;
+#NET  "ddr2_zio"        LOC = "Y2" | IOSTANDARD = SSTL18_II;
+
+############################################################################
+## 
+##  Xilinx, Inc. 2006            www.xilinx.com 
+##  Tue Nov 9 08:19:20 2010
+##  Generated by MIG Version 3.5 w/ edits for XEM6010
+##  
+############################################################################
+##  File name :       example_top.ucf
+## 
+##  Details :     Constraints file
+##                    FPGA family:       spartan6
+##                    FPGA:              xc6slx45-fgg484
+##                    Speedgrade:        -2
+##                    Design Entry:      VERILOG
+##                    Design:            with Test bench
+##                    DCM Used:          Enable
+##                    No.Of Memory Controllers: 1
+##
+############################################################################ 
+
+############################################################################
+# Extended MCB performance mode requires a different Vccint specification to
+# achieve higher maximum frequencies for DDR2 and DDR3.Consult the Spartan-6
+#datasheet (DS162) table 2 and 24 for more information 
+############################################################################
+CONFIG MCB_PERFORMANCE= STANDARD;
+
+##################################################################################
+# Timing Ignore constraints for paths crossing the clock domain 
+##################################################################################
+NET "Logger2/memc?_wrapper_inst/memc?_mcb_raw_wrapper_inst/selfrefresh_mcb_mode" TIG;
+NET "Logger2/c?_pll_lock" TIG;
+NET "Logger2/memc?_wrapper_inst/memc?_mcb_raw_wrapper_inst/gen_term_calib.mcb_soft_calibration_top_inst/mcb_soft_calibration_inst/CKE_Train" TIG;
+
+############################################################################
+## Memory Controller 3                               
+## Memory Device: DDR2_SDRAM->MT47J64M16XX-3 
+## Supported Part Numbers: MT47J64M16HQ-3
+############################################################################
+
+############################################################################
+## I/O TERMINATION                                                          
+############################################################################
+NET "mcb3_dram_dq[*]"                                 IN_TERM = NONE;
+NET "mcb3_dram_dqs"                                   IN_TERM = NONE;
+NET "mcb3_dram_dqs_n"                                 IN_TERM = NONE;
+NET "mcb3_dram_udqs"                                  IN_TERM = NONE;
+NET "mcb3_dram_udqs_n"                                IN_TERM = NONE;
+
+############################################################################
+# I/O STANDARDS 
+############################################################################
+
+NET  "mcb3_dram_dq[*]"                               IOSTANDARD = SSTL18_II;
+NET  "mcb3_dram_a[*]"                                IOSTANDARD = SSTL18_II;
+NET  "mcb3_dram_ba[*]"                               IOSTANDARD = SSTL18_II;
+NET  "mcb3_dram_dqs"                                 IOSTANDARD = DIFF_SSTL18_II;
+NET  "mcb3_dram_udqs"                                IOSTANDARD = DIFF_SSTL18_II;
+NET  "mcb3_dram_dqs_n"                               IOSTANDARD = DIFF_SSTL18_II;
+NET  "mcb3_dram_udqs_n"                              IOSTANDARD = DIFF_SSTL18_II;
+NET  "mcb3_dram_ck"                                  IOSTANDARD = DIFF_SSTL18_II;
+NET  "mcb3_dram_ck_n"                                IOSTANDARD = DIFF_SSTL18_II;
+NET  "mcb3_dram_cke"                                 IOSTANDARD = SSTL18_II;
+NET  "mcb3_dram_ras_n"                               IOSTANDARD = SSTL18_II;
+NET  "mcb3_dram_cas_n"                               IOSTANDARD = SSTL18_II;
+NET  "mcb3_dram_we_n"                                IOSTANDARD = SSTL18_II;
+NET  "mcb3_dram_odt"                                 IOSTANDARD = SSTL18_II;
+NET  "mcb3_dram_dm"                                  IOSTANDARD = SSTL18_II;
+NET  "mcb3_dram_udm"                                 IOSTANDARD = SSTL18_II;
+NET  "mcb3_rzq"                                      IOSTANDARD = SSTL18_II;
+NET  "mcb3_zio"                                      IOSTANDARD = SSTL18_II;
+NET  "mcb3_dram_cs_n"                                IOSTANDARD = LVCMOS18;
+#NET  "c3_sys_clk_p"                                IOSTANDARD = LVDS_25;    #OK
+#NET  "c3_sys_clk_n"                                IOSTANDARD = LVDS_25;    #OK
+#NET  "c3_sys_rst_n"                                IOSTANDARD = LVCMOS18;   #OK
+############################################################################
+# MCB 3
+# Pin Location Constraints for Clock, Masks, Address, and Controls
+############################################################################
+
+NET  "mcb3_dram_a[0]"                            LOC = "H2" ;
+NET  "mcb3_dram_a[10]"                           LOC = "G4" ;
+NET  "mcb3_dram_a[11]"                           LOC = "C1" ;
+NET  "mcb3_dram_a[12]"                           LOC = "D1" ;
+NET  "mcb3_dram_a[1]"                            LOC = "H1" ;
+NET  "mcb3_dram_a[2]"                            LOC = "H5" ;
+NET  "mcb3_dram_a[3]"                            LOC = "K6" ;
+NET  "mcb3_dram_a[4]"                            LOC = "F3" ;
+NET  "mcb3_dram_a[5]"                            LOC = "K3" ;
+NET  "mcb3_dram_a[6]"                            LOC = "J4" ;
+NET  "mcb3_dram_a[7]"                            LOC = "H6" ;
+NET  "mcb3_dram_a[8]"                            LOC = "E3" ;
+NET  "mcb3_dram_a[9]"                            LOC = "E1" ;
+NET  "mcb3_dram_ba[0]"                           LOC = "G3" ;
+NET  "mcb3_dram_ba[1]"                           LOC = "G1" ;
+NET  "mcb3_dram_ba[2]"                           LOC = "F1" ;
+NET  "mcb3_dram_cas_n"                           LOC = "K4" ;
+NET  "mcb3_dram_ck"                              LOC = "H4" ;
+NET  "mcb3_dram_ck_n"                            LOC = "H3" ;
+NET  "mcb3_dram_cke"                             LOC = "D2" ;
+NET  "mcb3_dram_dm"                              LOC = "L4" ;
+NET  "mcb3_dram_dq[0]"                           LOC = "N3" ;
+NET  "mcb3_dram_dq[10]"                          LOC = "R3" ;
+NET  "mcb3_dram_dq[11]"                          LOC = "R1" ;
+NET  "mcb3_dram_dq[12]"                          LOC = "U3" ;
+NET  "mcb3_dram_dq[13]"                          LOC = "U1" ;
+NET  "mcb3_dram_dq[14]"                          LOC = "V2" ;
+NET  "mcb3_dram_dq[15]"                          LOC = "V1" ;
+NET  "mcb3_dram_dq[1]"                           LOC = "N1" ;
+NET  "mcb3_dram_dq[2]"                           LOC = "M2" ;
+NET  "mcb3_dram_dq[3]"                           LOC = "M1" ;
+NET  "mcb3_dram_dq[4]"                           LOC = "J3" ;
+NET  "mcb3_dram_dq[5]"                           LOC = "J1" ;
+NET  "mcb3_dram_dq[6]"                           LOC = "K2" ;
+NET  "mcb3_dram_dq[7]"                           LOC = "K1" ;
+NET  "mcb3_dram_dq[8]"                           LOC = "P2" ;
+NET  "mcb3_dram_dq[9]"                           LOC = "P1" ;
+NET  "mcb3_dram_dqs"                             LOC = "L3" ;
+NET  "mcb3_dram_dqs_n"                           LOC = "L1" ;
+NET  "mcb3_dram_odt"                             LOC = "J6" ;
+NET  "mcb3_dram_ras_n"                           LOC = "K5" ;
+#NET  "c3_sys_clk_n"                              LOC = "Y12" ; #OK
+#NET  "c3_sys_clk_p"                              LOC = "W12" ; #OK
+#NET  "c3_sys_rst_n"                              LOC = "R11" ; #OK
+NET  "mcb3_dram_udm"                             LOC = "M3" ;
+NET  "mcb3_dram_udqs"                            LOC = "T2" ;
+NET  "mcb3_dram_udqs_n"                          LOC = "T1" ;
+NET  "mcb3_dram_we_n"                            LOC = "F2" ;
+NET  "mcb3_dram_cs_n"                            LOC = "C3" ;   #OK
+
+##################################################################################
+#RZQ is required for all MCB designs.   Do not move the location #
+#of this pin for ES devices.For production devices, RZQ can be moved to any #
+#valid package pin within the MCB bank.For designs using Calibrated Input Termination, #
+#a 2R resistor should be connected between RZQand ground, where R is the desired#
+#input termination value.  Otherwise, RZQ should be left as a no-connect (NC) pin.#
+##################################################################################
+NET  "mcb3_rzq"                                  LOC = "K7" ;
+##################################################################################
+#ZIO is only required for MCB designs using Calibrated Input Termination.#
+#ZIO can be moved to any valid package pin (i.e. bonded IO) within the#
+#MCB bank but must be left as a no-connect (NC) pin.#
+##################################################################################
+NET  "mcb3_zio"                                  LOC = "Y2" ;

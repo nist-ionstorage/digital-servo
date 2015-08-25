@@ -1,0 +1,13 @@
+*.obj
+moc_*
+*.asy
+*.gise
+*.ngc
+gui/debug
+gui/release
+gui/thirdparty/qwt-6.1.2
+firmware/_ngo
+firmware/_xmsgs
+firmware/iseconfig
+firmware/xlnx_auto_0_xdb
+firmware/xst

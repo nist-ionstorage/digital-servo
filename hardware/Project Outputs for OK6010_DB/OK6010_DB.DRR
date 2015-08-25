@@ -1,0 +1,26 @@
+---------------------------------------------------------------------------
+NCDrill File Report For: OK6010_DB.PcbDoc   11/27/2012  12:40:46 PM
+---------------------------------------------------------------------------
+
+Layer Pair : Top Layer to Bottom Layer
+ASCII RoundHoles File : OK6010_DB.TXT
+EIA File   : OK6010_DB.DRL
+
+Tool         Hole Size           Hole Type     Hole Count Plated       Tool Travel
+---------------------------------------------------------------------------
+T1        12mil (0.3048mm)         Round          356              69.39 Inch (1762.41 mm)
+T2        15mil (0.381mm)          Round          242              36.52 Inch (927.53 mm)
+T3        38mil (0.9652mm)         Round          9                1.20 Inch (30.48 mm)
+T4        40mil (1.016mm)          Round          2                0.39 Inch (10.00 mm)
+T5        42mil (1.0668mm)         Round          6                4.14 Inch (105.08 mm)
+T6        44mil (1.1176mm)         Round          2                2.70 Inch (68.59 mm)
+T7        52mil (1.3208mm)         Round          6                8.47 Inch (215.24 mm)
+T8        70mil (1.778mm)          Round          24               11.26 Inch (286.03 mm)
+T9        106mil (2.6924mm)        Round          4                4.09 Inch (103.90 mm)
+T10       120mil (3.048mm)         Round          4                9.97 Inch (253.24 mm)
+T11       125mil (3.175mm)         Round          4                7.17 Inch (182.00 mm)
+T12       40mil (1.016mm)          Round          4         NPTH   4.29 Inch (108.97 mm)
+---------------------------------------------------------------------------
+Totals                                            663              159.59 Inch (4053.47 mm)
+
+Total Processing Time (hh:mm:ss) : 00:00:00
