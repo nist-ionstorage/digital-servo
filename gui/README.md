@@ -25,7 +25,7 @@ into the `thirdparty\qwt-6.1.2` folder  .
         copy /Y lib\*.lib C:\Qt\Qt5.5.0\5.5\msvc2013\lib
         mkdir  C:\Qt\Qt5.5.0\5.5\msvc2013\include\qwt
         copy /Y src\*.h C:\Qt\Qt5.5.0\5.5\msvc2013\include\qwt
-        nmake clean
+        nmake clean  
 6. Obtain the Opal Kelly library files `okFrontPanelDLL.h` and `okFrontPanel.cpp` (located in the `C:\Program Files\Opal Kelly\FrontPanelUSB\API-32` folder after the FrontPanel SDK has been installed) and copy them to the digital-servo\gui folder.  Copy the file `okFrontPanel.dll` to the folder from which you will run the GUI.  
 7. Copy `SuperLaserLand_local_template.pro` to `local.pro` and modify as desired.
 8. Execute the `qupdate.bat` script.  
