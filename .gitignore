@@ -11,3 +11,6 @@ firmware/_xmsgs
 firmware/iseconfig
 firmware/xlnx_auto_0_xdb
 firmware/xst
+doc/*.*
+!doc/NIST_digital_servo_manual.tex
+!doc/NIST_digital_servo_manual.pdf
