@@ -10,7 +10,9 @@ David Leibrandt (david.leibrandt@nist.gov)
 
 SuperLaserLand is open source software which runs on a PC to control the NIST digital servo.
 
-This directory contains the source code, which was written and compiled with Microsoft Visual Studio 2013, Qt 5.5.0, and Qwt 6.1.2.  It does not contain the library files for the Opal Kelly FrontPanel SDK, which are required to compile the source code.  This code was developed and tested with version 4.0.8 of the FrontPanel SDK.
+This directory contains the source code, which was written and compiled with Microsoft Visual Studio 2013, Qt 5.5.0, and Qwt 6.1.2.  It does not contain the library files for the Opal Kelly FrontPanel SDK, which are required to compile the source code.  This code was developed and tested with the 32 bit version 4.0.8 of the FrontPanel SDK.
+
+For compatibility with the executable distributed here, install a 32 bit version between 4.0.8 and 4.3.1 of the Opal Kelly driver and dll.  Newer releases and 64 bit versions will require recompilation of SuperLaserLand.
 
 To compile on Windows:
 
